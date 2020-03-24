@@ -42,9 +42,9 @@ software, even if advised of the possibility of such damage.
     Contributors: Holger Bothien (SevenCs/Chartworld); Tom Richardson (UKHO); Sewoong Oh (KRISO);
     Yong Baek (KHOA); Raphael Malyankar (Jeppesen); Raphael Malyankar (Portolan Sciences LLC
   -->
-<xs:schema targetNamespace="http://www.iho.int/S100Base" elementFormDefault="qualified" 
-           xmlns="http://www.iho.int/S100Base" 
-           xmlns:mstns="http://www.iho.int/S100Base" 
+<xs:schema targetNamespace="https://raw.githubusercontent.com/MCLimited/test/master/base" elementFormDefault="qualified" 
+           xmlns="https://raw.githubusercontent.com/MCLimited/test/master/base" 
+           xmlns:mstns="https://raw.githubusercontent.com/MCLimited/test/master/base" 
            xmlns:xs="http://www.w3.org/2001/XMLSchema" version="4.0.0-20180611">
   <xs:complexType name="UnlimitedInteger">
     <xs:simpleContent>
