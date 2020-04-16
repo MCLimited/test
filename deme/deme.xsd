@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:bag="http://www.opennavsurf.org/schema/bag" xmlns:deme="http://www.deme-group.com/schema/deme" targetNamespace="http://www.deme-group.com/schema/deme" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- ================================= Annotation ================================ -->
+	<xs:annotation>
+		<xs:documentation>This file contains the DEME extensions to the BAG schema</xs:documentation>
+	</xs:annotation>
+	<!-- ================================== Imports ================================== -->
+	<xs:import namespace="http://www.isotc211.org/2005/gmi" schemaLocation="../gmi/gmi.xsd"/>
+	<xs:import namespace="http://www.isotc211.org/2005/gmd" schemaLocation="../gmd/gmd.xsd"/>
+	<xs:import namespace="http://www.isotc211.org/2005/gco" schemaLocation="../gco/gco.xsd"/>
+	<xs:import namespace="http://www.opennavsurf.org/schema/bag" schemaLocation="bag.xsd"/>
+	<!-- ########################################################################### -->
+	<!-- ########################################################################### -->
+	<!-- ================================== Classes ================================= -->
+	<xs:complexType name="DEME_DataIdentification_Type">
+		<xs:complexContent>
+			<xs:extension base="bag:BAG_DataIdentification_Type">
+				<xs:sequence>
+					<xs:element name="projectNumber" type="gco:CharacterString_PropertyType" minOccurs="1"/>
+					<xs:element name="projectName" type="gco:CharacterString_PropertyType" minOccurs="1"/>
+					<xs:element name="projectAbbreviation" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="jobNumber" type="gco:CharacterString_PropertyType" minOccurs="1"/>
+					<xs:element name="jobDescription" type="gco:CharacterString_PropertyType" minOccurs="1"/>
+					<xs:element name="surveyType" type="gco:CharacterString_PropertyType" minOccurs="1"/>
+					<xs:element name="surveyMethod" type="deme:DEME_SurveyMethodCode_PropertyType" minOccurs="1"/>
+					<xs:element name="surveyHeightingMethod" type="deme:DEME_HeightingMethodCode_PropertyType" minOccurs="0"/>
+					<xs:element name="surveyMeteoConditions" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="surveyEchoRole" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="DEME_DataIdentification" type="deme:DEME_DataIdentification_Type" substitutionGroup="bag:BAG_DataIdentification"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="DEME_InstrumentOffsets_Type">
+		<xs:sequence>
+			<xs:element name="X" type="gco:Decimal_PropertyType" minOccurs="0"/>
+			<xs:element name="Y" type="gco:Decimal_PropertyType" minOccurs="0"/>
+			<xs:element name="Z" type="gco:Decimal_PropertyType" minOccurs="0"/>
+			<xs:element name="R" type="gco:Decimal_PropertyType" minOccurs="0"/>
+			<xs:element name="P" type="gco:Decimal_PropertyType" minOccurs="0"/>
+			<xs:element name="H" type="gco:Decimal_PropertyType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+ 
+	
+	<!-- ........................................................................ -->
+	<xs:element name="DEME_InstrumentOffsets" type="deme:DEME_InstrumentOffsets_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="DEME_Instrument_Type">
+		<xs:complexContent>
+			<xs:extension base="gmi:MI_Instrument_Type">
+				<xs:sequence>
+					<xs:element name="InstrumentOffsets" type="deme:DEME_InstrumentOffsets_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="DEME_Instrument" type="deme:DEME_Instrument_Type" substitutionGroup="gmi:MI_Instrument"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="DEME_GeographicBoundingChainage_Type">
+		<xs:annotation>
+			<xs:documentation>Start and end chainage of the entire dataset</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="gmd:AbstractEX_GeographicExtent_Type">
+				<xs:sequence>
+					<xs:element name="beginChainage" type="gco:Decimal_PropertyType"/>
+					<xs:element name="endChainage" type="gco:Decimal_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="DEME_GeographicBoundingChainage" type="deme:DEME_GeographicBoundingChainage_Type" substitutionGroup="gmd:AbstractEX_GeographicExtent"/>
+	<!-- ........................................................................ -->
+	<xs:element name="DEME_SurveyMethodCode" type="gco:CodeListValue_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="DEME_SurveyMethodCode_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="deme:DEME_SurveyMethodCode"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="DEME_HeightingMethodCode" type="gco:CodeListValue_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="DEME_HeightingMethodCode_PropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="deme:DEME_HeightingMethodCode"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+</xs:schema>
